@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Node struct {
 	data int
@@ -22,13 +25,15 @@ func main() {
 	fmt.Println("--- Before Deletion ---")
 	list.printList()
 
-	list.DeleteNode()
-
-	fmt.Println("\n--- After Deleting Head (32 should be gone) ---")
-	list.printList()
-
 	fmt.Println("\n--- After Adding Head (Data should be inserted) ---")
 	list.InsertToStart(50)
+	list.printList()
+
+	fmt.Println("\n--- Deleting 90 ---")
+	err := list.DeleteAnyNode(90)
+	if err != nil {
+		fmt.Printf("Error: %s\n", err) // This will print your "not found" message
+	}
 	list.printList()
 
 }
@@ -37,7 +42,6 @@ func (list *LinkedList) InsertToLast(data int) {
 	nn := &Node{data, nil}
 	if list.head == nil {
 		list.head = nn
-
 	} else {
 		// Current node which are we on
 		cn := list.head
@@ -59,13 +63,47 @@ func (list *LinkedList) InsertToStart(data int) {
 
 }
 
-func (list *LinkedList) DeleteNode() *Node {
-
+func (list *LinkedList) DeleteAnyNode(data int) error {
 	if list.head == nil {
+		return errors.New("list is empty")
+	}
+
+	if list.head.data == data {
+		list.head = list.head.next
 		return nil
 	}
-	list.head = list.head.next
-	return list.head
+
+	for cn := list.head; cn.next != nil; {
+		if cn.next.data == data {
+			cn.next = cn.next.next
+			return nil
+		}
+		cn = cn.next
+
+	}
+
+	return fmt.Errorf("node with data %d not found in the list", data)
+
+}
+
+func (list *LinkedList) DeleteAllOccurrences(data int) {
+	for list.head != nil && list.head.data == data {
+		list.head = list.head.next
+	}
+
+	if list.head == nil {
+		return
+	}
+
+	cn := list.head
+	for cn.next != nil {
+		if cn.next.data == data {
+			// BYPASS the node
+			cn.next = cn.next.next
+		} else {
+			cn = cn.next
+		}
+	}
 }
 
 func (list *LinkedList) printList() {
