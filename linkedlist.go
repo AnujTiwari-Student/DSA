@@ -19,9 +19,18 @@ func main() {
 	list.InsertToLast(48)
 	list.InsertToLast(2)
 
+	fmt.Println("--- Before Deletion ---")
 	list.printList()
 
-	fmt.Println(list)
+	list.DeleteNode()
+
+	fmt.Println("\n--- After Deleting Head (32 should be gone) ---")
+	list.printList()
+
+	fmt.Println("\n--- After Adding Head (Data should be inserted) ---")
+	list.InsertToStart(50)
+	list.printList()
+
 }
 
 func (list *LinkedList) InsertToLast(data int) {
@@ -39,6 +48,24 @@ func (list *LinkedList) InsertToLast(data int) {
 		cn.next = nn
 	}
 
+}
+
+func (list *LinkedList) InsertToStart(data int) {
+
+	nn := &Node{data, nil}
+
+	nn.next = list.head
+	list.head = nn
+
+}
+
+func (list *LinkedList) DeleteNode() *Node {
+
+	if list.head == nil {
+		return nil
+	}
+	list.head = list.head.next
+	return list.head
 }
 
 func (list *LinkedList) printList() {
