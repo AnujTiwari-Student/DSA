@@ -21,7 +21,6 @@ func deleteDuplicates(head *ListNode) *ListNode {
 	fmt.Printf("Head: %d\n", cn.Val)
 
 	for cn != nil {
-		//fmt.Printf("head: %d\t Data: %d\n", *cn, cn.Val)
 
 		if cn.Next == nil || cn.Val != cn.Next.Val {
 			tail.Next = cn

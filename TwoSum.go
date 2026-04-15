@@ -3,11 +3,11 @@ package main
 import "fmt"
 
 func main() {
-	twoSum([]int{3, 3}, 6)
+	twoSum([]int{3, 2, 4}, 6)
 }
 
 func twoSum(nums []int, target int) []int {
-	var result = []int{}
+	var result = []int{0}
 
 	var maps = make(map[int]int)
 
@@ -23,6 +23,7 @@ func twoSum(nums []int, target int) []int {
 			fmt.Println(result)
 		}
 		maps[nums[i]] = i
+		fmt.Println(maps)
 
 	}
 	return result
