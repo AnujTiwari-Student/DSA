@@ -40,30 +40,31 @@ func addTwoNumbers(l1 *nn, l2 *nn) *nn {
 	list := dummy
 
 	carry := 0
-	sum := 0
-	digitToStore := 0
 
 	for l2 != nil || l1 != nil || carry != 0 {
 
-		v1, v2 := 0, 0
+		sum := carry
 
 		if l1 != nil {
-			v1 = l1.Val
+			sum += l1.Val
+			fmt.Printf("l1 sum is with carry=> %d\n", sum)
 			l1 = l1.Next
 		}
 
 		if l2 != nil {
-			v2 = l2.Val
+			sum += l2.Val
+			fmt.Printf("l1+l2 sum is =>%d\n", sum)
 			l2 = l2.Next
 		}
 
-		sum = v1 + v2 + carry
-
 		carry = sum / 10
-		digitToStore = sum % 10
+		fmt.Printf("Carry is: =>%d\n", carry)
+		fmt.Printf("Sum after carry is =>%d\n", sum)
 
-		list.Next = &nn{Val: digitToStore}
+		list.Next = &nn{Val: sum % 10}
+		fmt.Printf("List.Next after carry is =>%d\n", list.Next)
 		list = list.Next
+		fmt.Printf("List after carry is =>%d\n", list.Val)
 
 	}
 
