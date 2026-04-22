@@ -26,3 +26,23 @@ func containsDuplicate(nums []int) bool {
 
 	return false
 }
+
+//Same as the above one but using struct save space.
+
+//func containsDuplicate(nums []int) bool {
+//
+//	if len(nums) <= 1 {
+//		return false
+//	}
+//
+//	seen := make(map[int]int)
+//
+//	for i, num := range nums {
+//		if _, ok := seen[num]; ok {
+//			return true
+//		}
+//		seen[num] = i
+//	}
+//
+//	return false
+//}
