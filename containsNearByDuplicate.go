@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	arr := []int{1, 2, 2, 3}
+	arr := []int{1, 2, 5, 6, 7, 2, 3}
 	result := containsNearByDuplicate(arr, 3)
 	fmt.Println(result)
 }
